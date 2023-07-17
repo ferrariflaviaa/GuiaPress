@@ -5,6 +5,7 @@
     <div class="container">
       <hr>
       <h2>Categorias</h2>
+      <a class="btn btn-dark" href="/admin/categories/new">Criar nova categoria</a>
       <hr>
       <table class="table table-bordered">
         <thead>
@@ -27,7 +28,10 @@
               <th>
                 <%=category.slug%>
               </th>
-              <th></th>
+              <th>
+                <buttom class="btn btn-warning">Editar</buttom>
+                <buttom class="btn btn-danger">Deletar</buttom>
+              </th>
             </tr>
             <% }) %>
         </tbody>
