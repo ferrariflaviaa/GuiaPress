@@ -30,7 +30,10 @@
               </th>
               <th>
                 <buttom class="btn btn-warning">Editar</buttom>
-                <buttom class="btn btn-danger">Deletar</buttom>
+                <form method="POST" action="/categories/delete" style="display: inline;">
+                  <input type="hidden" name="id" value="<%= category.id %>">
+                  <button class="btn btn-danger">Deletar</button>
+              </form>
               </th>
             </tr>
             <% }) %>
