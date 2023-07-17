@@ -10,7 +10,8 @@
         <div class="card-body">
           <form method="POST" action="/categories/save">
             <input class="form-control" type="text" name="title" placeholder="Defina o título da artigo"><br>
-            <textarea class="form-control" type="text" name="body" placeholder="Escreva o artigo aqui!" id="article"></textarea><br>
+            <textarea class="form-control" type="text" name="body" placeholder="Escreva o artigo aqui!"
+              id="article"></textarea><br>
             <button class="btn btn-success">Cadastrar</button>
           </form>
         </div>
@@ -20,28 +21,29 @@
     <%- include('../../partials/footer') %>
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/tinymce.min.js"></script>
-      <script src="/tinymce/tinymce.min.js"></script>
+      <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5.8.2-114/langs/pt_BR.js"></script>
+      <script src="../../../public/tinymce/js/tinymce/tinymce.min.js"></script>
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
       <script src="http://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/jquery.tinymce.min.js"></script>
 
       <script>
-       tinymce.init({
-                selector: "#article",
-                plugins: [
-                    'advlist',
-                    'autolink',
-                    'link',
-                    'image',
-                    'lists',
-                    'preview',
-                    'searchreplace',
-                    'wordcount',
-                    'fullscreen',
-                    'insertdatetime',
-                    'media',
-                    'save',
-                    'table',
-                    'emoticons',
-                ]
-            })
+        tinymce.init({
+          selector: "#article",
+          plugins: [
+            'advlist',
+            'autolink',
+            'link',
+            'image',
+            'lists',
+            'preview',
+            'searchreplace',
+            'wordcount',
+            'fullscreen',
+            'insertdatetime',
+            'media',
+            'save',
+            'table',
+            'emoticons',
+          ]
+        })
       </script>
