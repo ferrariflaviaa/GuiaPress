@@ -30,10 +30,11 @@
               </th>
               <th>
                 <buttom class="btn btn-warning">Editar</buttom>
-                <form method="POST" action="/categories/delete" style="display: inline;">
+                <form method="POST" action="/categories/delete" style="display: inline;"
+                  onsubmit="confirmDeletion(event, this)">
                   <input type="hidden" name="id" value="<%= category.id %>">
                   <button class="btn btn-danger">Deletar</button>
-              </form>
+                </form>
               </th>
             </tr>
             <% }) %>
@@ -42,3 +43,13 @@
     </div>
 
     <%- include('../../partials/footer') %>
+
+      <script>
+        function confirmDeletion(event, form) {
+          event.preventDefault();
+          let decision = confirm("Você quer deletar está categoria?")
+          if (decision) {
+            form.submit();
+          }
+        }
+      </script>
