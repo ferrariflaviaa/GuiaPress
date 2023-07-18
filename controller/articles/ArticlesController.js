@@ -5,7 +5,7 @@ const Article = require("../../model/articles/Article")
 const slugify = require("slugify")
 
 
-router.get("/articles", (req, res) => {
+router.get("/admin/articles", (req, res) => {
   res.send("Rota de artigos")
 })
 
@@ -15,13 +15,16 @@ router.get("/admin/articles/new", (req, res) => {
   })
 })
 
-router.post("/article/save", (req, res)=> {
-  const {title, body, category} = req.body;
+router.post("/articles/save", (req, res) => {
+  const { title, body, category } = req.body;
+
   Article.create({
     title,
     slug: slugify(title),
     body,
     categoryId: category
+  }).then(()=> {
+    res.redirect("/admin/articles")
   })
 })
 module.exports = router;
