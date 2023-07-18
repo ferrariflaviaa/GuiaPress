@@ -17,32 +17,39 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  Article.findAll().then(articles => {
+  Article.findAll({
+    order: [
+      ['id', 'DESC']
+    ]
+  }).then(articles => {
     res.render("index", { articles: articles });
   })
 })
 
-app.get("/:slug", (req, res) => {
-  const { slug } = req.body;
 
-  Article.findOne({
-    where: {
-      slug: slug
-    }
-  }).then((article) => {
-    if (article != undefined) {
-      res.render("article", {article: article})
-    } else {
-      res.redirect("/")
-    }
-  }).catch(() => {
-    res.redirect("/")
+app.get("/:slug",(req, res) => {
+    var slug = req.params.slug;
+    Article.findOne({
+          where: {
+                slug: slug
+            }
+        }).then(article => {
+              if(article != undefined){
+                    Category.findAll().then(categories => {
+                          res.render("article", {article: article, categories: categories});
+                      });
+                  }else{
+          res.redirect("/");
+      }
+  }).catch( err => {
+        res.redirect("/");
+    });
   })
-})
-
-//Database
-connection.authenticate().then(() => {
-  console.log("Conexão feita com sucesso");
+  
+  //Database
+  
+  connection.authenticate().then(() => {
+    console.log("Conexão feita com sucesso");
 }).catch((error) => {
   console.log(error)
 })
