@@ -13,12 +13,30 @@ app.set("view engine", "ejs");
 app.use(express.static('public'));
 
 //Body parser
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
   Article.findAll().then(articles => {
-    res.render("index", {articles: articles});
+    res.render("index", { articles: articles });
+  })
+})
+
+app.get("/:slug", (req, res) => {
+  const { slug } = req.body;
+
+  Article.findOne({
+    where: {
+      slug: slug
+    }
+  }).then((article) => {
+    if (article != undefined) {
+      res.render("article", {article: article})
+    } else {
+      res.redirect("/")
+    }
+  }).catch(() => {
+    res.redirect("/")
   })
 })
 
