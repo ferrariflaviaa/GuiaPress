@@ -6,11 +6,13 @@
         <li class="nav-item">
             <a class="nav-link" style="color: white;" href="/">Home</a>
         </li>
-        <% categories.forEach(category => { %>
+        <% categories.forEach(category=> { %>
             <li class="nav-item d-inline">
-                <a class="nav-link" style="color: white;" href="/"><%= category.title %></a>
+                <a class="nav-link" style="color: white;" href="/category/<%=category.slug%>">
+                    <%= category.title %>
+                </a>
             </li>
-        <% }) %>
+            <% }) %>
     </ul>
-    
+
 </nav>

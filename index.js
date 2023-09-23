@@ -48,8 +48,33 @@ app.get("/:slug",(req, res) => {
     });
   })
   
-  //Database
-  
+
+app.get('/category/:slug', (req, res) => {
+  var slug = req.params.slug;
+  Category.findOne({
+      where: {
+          slug: slug
+      },
+      include: [{
+          model: Article,
+          include: [{model: Category}],
+        }] //Serve como um join para ligar category e article
+  }).then(category => {
+      if(category != undefined){
+          Category.findAll().then(categories => {
+              res.render('index', {articles: category.articles, categories: categories});
+          });
+      } else {
+          res.redirect('/');
+      }
+  }).catch(error => {
+      console.log('Ocorreu um erro: '+error)
+      res.redirect('/');
+  });
+})
+
+
+//Database  
   connection.authenticate().then(() => {
     console.log("Conexão feita com sucesso");
 }).catch((error) => {
