@@ -26,6 +26,10 @@
       </div>
     </div> 
 
+    <div id="content" style="display: none">
+      <%= article.body %>
+    </div>
+
     <%- include('../../partials/footer') %>
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/tinymce.min.js"></script>
@@ -52,6 +56,9 @@
             'save',
             'table',
             'emoticons',
-          ]
+          ],
+          init_instance_callback: () => {
+            tinymce.get("article").setContent($("#content").html())
+          }
         })
       </script>
