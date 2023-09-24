@@ -1,5 +1,5 @@
 const express = require("express");
-const slugify = require("slugify")
+const bcrypt = require("bcryptjs")
 const router = express.Router();
 const User = require("./../../model/users/users")
 
@@ -12,9 +12,16 @@ router.get("/admin/users/create", (req, res) => {
 })
 
 router.post("/users/create", (req, res) => {
-  let email = req.body.email
-  let password = req.body.password
+  let { email, password } = req.body
+  let salt = bcrypt.genSaltSync(10)
+  let hash = bcrypt.hashSync(password, salt)
 
-  console.log( email, password )
+  User.create({
+    email,
+    password: hash
+  }).then(() => {
+    res.redirect("/")
+  })
+
 })
 module.exports = router;
