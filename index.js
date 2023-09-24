@@ -3,8 +3,10 @@ const app = express();
 const connection = require("./database/database")
 const categoriesController = require("./controller/categories/CategoriesController")
 const articlesController = require("./controller/articles/ArticlesController")
+const userController = require("./controller/users/userController")
 const Article = require("./model/articles/Article")
 const Category = require("./model/categories/category")
+const User = require("./model/users/users")
 
 //View engine
 app.set("view engine", "ejs");
@@ -85,6 +87,7 @@ app.get('/category/:slug', (req, res) => {
 
 app.use("/", categoriesController)
 app.use("/", articlesController)
+app.use("/", userController)
 
 app.listen(8080, () => {
   console.log("O servidor está rodando")
