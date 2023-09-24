@@ -90,42 +90,44 @@ router.post("/articles/update", (req, res) => {
 })
 
 //Paginação
-router.get("/articles/page/:num", (req, res) => { 
+router.get("/articles/page/:num", (req, res) => {
   var page = req.params.num;
   var offset = 0;
-  var limit = 4;
+  var limit = 1;
 
-  if(isNaN(page) || page == 1 ){
-      offset = 0;
-  }else if(page == 2){
-      offset = 1 * parseInt(limit); //Converte para número e multiplica 
-  }else{
-      offset = parseInt(page) * parseInt(limit) - parseInt(limit); //Converte para número e multiplica pela qtd de itens na página
+  if (isNaN(page) || page == 1) {
+    offset = 0;
+  } else if (page == 2) {
+    offset = 1 * parseInt(limit); //Converte para número e multiplica 
+  } else {
+    offset = parseInt(page) * parseInt(limit) - parseInt(limit); //Converte para número e multiplica pela qtd de itens na página
   }
 
   //Retorna tudo e a quantidade 
   Article.findAndCountAll({
-      limit: limit,
-      offset: offset //Onde inicia - começa no zero - Foi passada a variável offset
+    limit: limit,
+    offset: offset //Onde inicia - começa no zero - Foi passada a variável offset
   }).then(articles => {
 
-      //Verificar se tem próxima página
-      var next;
-      if(offset + parseInt(limit) >= articles.count){
-          next = false;
-      }else{
-          next = true;
-      }
+    //Verificar se tem próxima página
+    var next;
+    if (offset + parseInt(limit) >= articles.count) {
+      next = false;
+    } else {
+      next = true;
+    }
 
-      var result = {
-          next : next,
-          page : page,
-          offset : offset,
-          articles : articles
-      }
+    var result = {
+      next: next,
+      page: page,
+      offset: offset,
+      articles: articles
+    }
 
-      res.json(result);
+    Category.findAll().then(categories => {
+      res.render("admin/articles/pages", { result: result, categories: categories })
+    })
   })
-  
+
 });
 module.exports = router;
