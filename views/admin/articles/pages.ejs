@@ -16,6 +16,28 @@
             </div>
           </div> <br>
           <% }) %>
+            <div class="row">
+              <div class="col col-12">
+                <% if(result.next) { %>
+                  <a href="/articles/page/<%= parseInt(result.page) + 1%>" style="float: right;">
+                    <button class="btn btn-danger">Próximo</button>
+                  </a>
+                  <% } %>
+
+                    <% if (result.page> 1) { %>
+                      <a href="/articles/page/<%= parseInt(result.page) - 1%>" style="float: left;">
+                        <button class="btn btn-danger">Anterior</button>
+                      </a>
+                      <% } %>
+
+                        <% if (result.page <=1) { %>
+                          <a href="/" style="float: left;">
+                            <button class="btn btn-danger">Página inicial</button>
+                          </a>
+                          <% } %>
+              </div>
+            </div>
+            <hr>
       </div>
     </body>
 
