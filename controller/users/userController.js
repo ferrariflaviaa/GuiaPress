@@ -4,7 +4,9 @@ const router = express.Router();
 const User = require("./../../model/users/users")
 
 router.get("/admin/users", (req, res) => {
-  res.send("Listagem de usuários")
+  User.findAll().then(users => {
+    res.render("admin/users/index",{users: users})
+  })
 })
 
 router.get("/admin/users/create", (req, res) => {
