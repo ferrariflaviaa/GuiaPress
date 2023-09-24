@@ -17,10 +17,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
+  let limit = 4
   Article.findAll({
     order: [
       ['id', 'DESC']
-    ]
+    ],
+    limit
   }).then(articles => {
     Category.findAll().then(categories => {
       res.render("index", {articles: articles, categories: categories})

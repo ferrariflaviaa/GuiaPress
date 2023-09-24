@@ -93,7 +93,7 @@ router.post("/articles/update", (req, res) => {
 router.get("/articles/page/:num", (req, res) => {
   var page = req.params.num;
   var offset = 0;
-  var limit = 1;
+  var limit = 4;
 
   if (isNaN(page) || page == 1) {
     offset = 0;
@@ -106,7 +106,10 @@ router.get("/articles/page/:num", (req, res) => {
   //Retorna tudo e a quantidade 
   Article.findAndCountAll({
     limit: limit,
-    offset: offset //Onde inicia - começa no zero - Foi passada a variável offset
+    offset: offset ,//Onde inicia - começa no zero - Foi passada a variável offset
+    order: [
+      ['id', 'DESC']
+    ],
   }).then(articles => {
 
     //Verificar se tem próxima página
