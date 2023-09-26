@@ -23,14 +23,14 @@
               <th>
                 <%=user.email%>
               </th>
-              <!-- <th> -->
-                <!-- <a href="/admin/categories/edit/<%= user.id %>" class="btn btn-warning">Editar</a> -->
-                <!-- <form method="POST" action="/categories/delete" style="display: inline;"
+              <th>
+                <a href="/admin/users/edit/<%= user.id %>" class="btn btn-warning">Editar</a>
+                <form method="POST" action="/users/delete" style="display: inline;"
                   onsubmit="confirmDeletion(event, this)">
                   <input type="hidden" name="id" value="<%= user.id %>">
                   <button class="btn btn-danger">Deletar</button>
-                </form> -->
-              <!-- </th> -->
+                </form>
+              </th>
             </tr>
             <% }) %>
         </tbody>
