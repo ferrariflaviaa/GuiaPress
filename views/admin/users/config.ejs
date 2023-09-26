@@ -1,4 +1,29 @@
 <%- include('../../partials/header') %>
   <%- include('../../partials/navbar') %>
-  <h1>Teste</h1>
-<%- include('../../partials/footer') %>
+    <div class="container">
+      <hr>
+      <h2>Configuração</h2>
+      <div class="mt-5"></div>
+      <table class="table table-bordered" >
+        <thead style="background-color: #343A40; color: aliceblue">
+          <tr>
+            <th>Opções</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Artigo</td>
+            <td><a href="/admin/articles"> <button type="button" class="btn btn-secondary">Acesso</button></a></td>
+          </tr>
+          <tr>
+            <td>Categorias</td>
+            <td><a href="/admin/categories"> <button type="button" class="btn btn-secondary">Acesso</button></a></td>
+          </tr>
+          <tr>
+            <td>Usuário</td>
+            <td><a href="/admin/users"> <button type="button" class="btn btn-secondary">Acesso</button></a></td>
+          </tr>
+        </tbody>
+      </table>
+      <%- include('../../partials/footer') %>
