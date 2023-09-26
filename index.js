@@ -17,7 +17,7 @@ app.set("view engine", "ejs");
 
 //Sessions
 app.use(session({
-  secret: "qualquercoisa", cookie: {maxAge: 3000000000}
+  secret: "qualquercoisa", cookie: {maxAge: 14400000}
 }))
 
 //Static
@@ -27,9 +27,9 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use("/", userController)
 app.use("/", categoriesController)
 app.use("/", articlesController)
+app.use("/", userController)
 
 app.get("/", (req, res) => {
   let limit = 4

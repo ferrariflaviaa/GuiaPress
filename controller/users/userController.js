@@ -2,22 +2,22 @@ const express = require("express");
 const bcrypt = require("bcryptjs")
 const router = express.Router();
 const User = require("./../../model/users/users")
+const {adminAuth,adminNotAuth} = require("../../middleware/adminAuth")
 
-router.get("/admin/users", (req, res) => {
+router.get("/admin/users", adminAuth,(req, res) => {
   User.findAll().then(users => {
     res.render("admin/users/index", { users: users })
   })
 })
 
-router.get("/admin/users/create", (req, res) => {
+router.get("/admin/users/create", adminAuth,(req, res) => {
   res.render("admin/users/create")
 })
 
-router.post("/users/create", (req, res) => {
+router.post("/users/create", adminAuth,(req, res) => {
   let { email, password } = req.body
 
   User.findOne({ where: { email: email } }).then(user => {
-    console.log(user)
     if (user == undefined) {
       let salt = bcrypt.genSaltSync(10)
       let hash = bcrypt.hashSync(password, salt)
@@ -34,7 +34,7 @@ router.post("/users/create", (req, res) => {
   })
 })
 
-router.get("/admin/login", (req, res) => {
+router.get("/admin/login",adminNotAuth,(req, res) => {
   res.render("admin/users/login")
 })
 
@@ -50,7 +50,7 @@ router.post("/authenticate", (req, res) => {
           id: user.id,
           email: user.email
         }
-        res.json(req.session.user)
+        res.redirect("/admin/articles")
       } else {
         res.redirect("/admin/login")
       }
