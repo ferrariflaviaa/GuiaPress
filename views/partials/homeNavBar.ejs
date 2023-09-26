@@ -14,5 +14,16 @@
             </li>
             <% }) %>
     </ul>
+    <ul class="navbar-nav ml-auto ">
+        <% if(user){ %>
+            <li class="nav-item">
+                <a class="nav-link" style="color: white;" href="/admin/config">Configuração</a>
+            </li>
+            <%}else{%>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;" href="/admin/login">Login</a>
+                </li>
+            <%}%>
+    </ul>
 
 </nav>

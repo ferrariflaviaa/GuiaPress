@@ -17,7 +17,7 @@ app.set("view engine", "ejs");
 
 //Sessions
 app.use(session({
-  secret: "qualquercoisa", cookie: {maxAge: 14400000}
+  secret: "qualquercoisa", cookie: {maxAge: 14400000000}
 }))
 
 //Static
@@ -40,7 +40,7 @@ app.get("/", (req, res) => {
     limit
   }).then(articles => {
     Category.findAll().then(categories => {
-      res.render("index", {articles: articles, categories: categories})
+      res.render("index", {articles: articles, categories: categories, user: req.session.user})
     })
   })
 })
@@ -55,7 +55,7 @@ app.get("/:slug",(req, res) => {
         }).then(article => {
               if(article != undefined){
                     Category.findAll().then(categories => {
-                          res.render("article", {article: article, categories: categories});
+                          res.render("article", {article: article, categories: categories, user: req.session.user});
                       });
                   }else{
           res.redirect("/");
@@ -79,7 +79,7 @@ app.get('/category/:slug', (req, res) => {
   }).then(category => {
       if(category != undefined){
           Category.findAll().then(categories => {
-              res.render('index', {articles: category.articles, categories: categories});
+              res.render('index', {articles: category.articles, categories: categories, user: req.session.user})
           });
       } else {
           res.redirect('/');
