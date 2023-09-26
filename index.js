@@ -12,9 +12,12 @@ const session = require("express-session")
 //View engine
 app.set("view engine", "ejs");
 
+
+
+
 //Sessions
 app.use(session({
-  secret: "qualquercoisa", cookie: {maxAge: 30000}
+  secret: "qualquercoisa", cookie: {maxAge: 3000000000}
 }))
 
 //Static
@@ -23,6 +26,10 @@ app.use(express.static('public'));
 //Body parser
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+app.use("/", userController)
+app.use("/", categoriesController)
+app.use("/", articlesController)
 
 app.get("/", (req, res) => {
   let limit = 4
@@ -91,9 +98,7 @@ app.get('/category/:slug', (req, res) => {
   console.log(error)
 })
 
-app.use("/", categoriesController)
-app.use("/", articlesController)
-app.use("/", userController)
+
 
 app.listen(8080, () => {
   console.log("O servidor está rodando")
