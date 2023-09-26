@@ -7,9 +7,15 @@ const userController = require("./controller/users/userController")
 const Article = require("./model/articles/Article")
 const Category = require("./model/categories/category")
 const User = require("./model/users/users")
+const session = require("express-session")
 
 //View engine
 app.set("view engine", "ejs");
+
+//Sessions
+app.use(session({
+  secret: "qualquercoisa", cookie: {maxAge: 30000}
+}))
 
 //Static
 app.use(express.static('public'));
