@@ -32,11 +32,15 @@ app.use("/", articlesController)
 app.use("/", userController)
 
 app.get("/", (req, res) => {
-  let limit = 4
+  let limit = 10
   Article.findAll({
     order: [
       ['id', 'DESC']
-    ],
+    ],    
+    include: [{
+      model: Category,
+      include: [{model: Article}],
+    }] ,
     limit
   }).then(articles => {
     Category.findAll().then(categories => {
@@ -51,7 +55,7 @@ app.get("/:slug",(req, res) => {
     Article.findOne({
           where: {
                 slug: slug
-            }
+            },
         }).then(article => {
               if(article != undefined){
                     Category.findAll().then(categories => {

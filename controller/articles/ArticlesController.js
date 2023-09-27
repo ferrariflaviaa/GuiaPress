@@ -94,7 +94,7 @@ router.post("/articles/update", adminAuth,(req, res) => {
 router.get("/articles/page/:num", (req, res) => {
   var page = req.params.num;
   var offset = 0;
-  var limit = 4;
+  var limit = 10;
 
   if (isNaN(page) || page == 1) {
     offset = 0;

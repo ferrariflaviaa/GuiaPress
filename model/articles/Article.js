@@ -14,7 +14,7 @@ const Article = connection.define('articles', {
   body: {
     type: DataTypes.TEXT,
     allowNull: false
-  }
+  },
 })
 
 Category.hasMany(Article) // Uma categoria tem muitos artigos
