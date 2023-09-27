@@ -82,7 +82,7 @@ router.post("/authenticate", (req, res) => {
           id: user.id,
           email: user.email
         }
-        res.redirect("/admin/articles")
+        res.render('admin/users/config', {message: "tese"})
       } else {
         res.redirect("/admin/login")
       }

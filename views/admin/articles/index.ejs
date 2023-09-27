@@ -4,7 +4,7 @@
 
     <div class="container">
       <hr>
-      <h2>Categorias</h2>
+      <h2>Artigo</h2>
       <a class="btn btn-dark" href="/admin/articles/new">Criar nova artigo</a>
       <hr>
       <table class="table table-bordered">
@@ -12,7 +12,6 @@
           <tr>
             <th>ID</th>
             <th>Título</th>
-            <th>Slug</th>
             <th>Categoria</th>
             <th>Ações</th>
           </tr>
@@ -27,12 +26,10 @@
                 <%=article.title%>
               </td>
               <td>
-                <%=article.slug%>
-              </td>
-              <td>
                 <%=article.category.title%>
               </td>
               <td>
+                <a href="/admin/articles/edit/<%= article.id %>" class="btn btn-warning">Editar</a>
                 <form method="POST" action="/articles/delete" style="display: inline;"
                   onsubmit="confirmDeletion(event, this)">
                   <input type="hidden" name="id" value="<%= article.id %>">
