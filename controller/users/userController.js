@@ -54,7 +54,10 @@ router.get("/admin/users/edit/:id", adminAuth, (req, res) => {
 
 router.post("/users/update", adminAuth, (req, res) => {
   let { id, email, password } = req.body;
-  User.update({ email: email, password: password }, {
+  let salt = bcrypt.genSaltSync(10)
+  let hash = bcrypt.hashSync(password, salt)
+
+  User.update({ email: email, password: hash }, {
     where: {
       id: id
     }
@@ -91,6 +94,25 @@ router.post("/authenticate", (req, res) => {
 
 router.get('/admin/config', adminAuth, (req, res) => {
   res.render('admin/users/config')
+})
+
+router.post("/users/delete", adminAuth,(req, res) => {
+  let {id} = req.body;
+  if(id !=undefined){
+    if(!isNaN(id)){
+      User.destroy({
+        where: {
+          id: id
+        }
+      }).then(()=> {
+        res.redirect("/admin/users")
+      })
+    }else{
+      res.redirect("/admin/users")
+    }
+  }else{
+    res.redirect("/admin/users")
+  }
 })
 
 router.get("/logout", adminAuth, (req, res) => {
