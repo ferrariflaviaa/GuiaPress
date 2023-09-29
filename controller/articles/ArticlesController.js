@@ -111,6 +111,10 @@ router.get("/articles/page/:num", (req, res) => {
     order: [
       ['id', 'DESC']
     ],
+    include: [{
+      model: Category,
+      include: [{model: Article}],
+    }] ,
   }).then(articles => {
 
     //Verificar se tem próxima página
@@ -120,6 +124,7 @@ router.get("/articles/page/:num", (req, res) => {
     } else {
       next = true;
     }
+
 
     var result = {
       next: next,
