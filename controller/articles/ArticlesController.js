@@ -96,7 +96,7 @@ router.get("/articles/page/:num", (req, res) => {
   var offset = 0;
   var limit = 10;
 
-  if (isNaN(page) || page == 1) {
+  if (isNaN(page) ||  page <= 1) {
     offset = 0;
   } else if (page == 2) {
     offset = 1 * parseInt(limit); //Converte para número e multiplica 
@@ -114,7 +114,8 @@ router.get("/articles/page/:num", (req, res) => {
     include: [{
       model: Category,
       include: [{model: Article}],
-    }] ,
+    }],
+    distinct: true, 
   }).then(articles => {
 
     //Verificar se tem próxima página
@@ -124,8 +125,7 @@ router.get("/articles/page/:num", (req, res) => {
     } else {
       next = true;
     }
-
-
+    
     var result = {
       next: next,
       page: page,
@@ -139,4 +139,7 @@ router.get("/articles/page/:num", (req, res) => {
   })
 
 });
+
+
+
 module.exports = router;

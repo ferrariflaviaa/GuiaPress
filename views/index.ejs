@@ -6,10 +6,8 @@
         <hr>
         <div class="jumbotron">
           <h1 class="display-4">Bem-vindo</h1>
-          <p class="lead">Este é um simples blog do guia do programador.</p>
-          <hr class="my-4">
-          <p>Descrição detalhada aqui!</p>
-          <a class="btn btn-primary btn-lg" href="#" role="button">Leia mais</a>
+          <p class="lead">Nosso blog dedicado à tecnologia, onde você encontrará informações e insights valiosos sobre o
+            mundo em constante evolução da inovação tecnológica.</p>
         </div>
         <hr>
 
@@ -17,7 +15,9 @@
           <% articles.forEach((article, index)=> { %>
             <div class="col-md-4">
               <div class="card text-white bg-secondary mb-3 h-100">
-                <div class="card-header"><%=article.category.title%></div>
+                <div class="card-header">
+                  <%=article.category.title%>
+                </div>
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">
                     <%= article.title %>
