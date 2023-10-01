@@ -4,13 +4,19 @@
 </a>
  
 <ul class="navbar-nav mr-auto">
-    <li class="nav-item">
-        <a class="nav-link" style="color: white;" href="/admin/categories">Categorias</a>
-    </li>
- 
-    <li class="nav-item">
-        <a class="nav-link" style="color: white;" href="/admin/articles">Artigos</a>
-    </li>
+
+    <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Opções
+        </a>
+      
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="nav-link" style="color: black;" href="/admin/config">Geral</a>
+            <a class="nav-link" style="color: black;" href="/admin/articles">Artigos</a>
+            <a class="nav-link" style="color: black;" href="/admin/categories">Categorias</a>
+            <a class="nav-link" style="color: black;" href="/admin/users">Usuários</a>
+        </div>
+      </div>
         
 </ul>
 <ul class="navbar-nav ml-auto ">
